@@ -1,0 +1,103 @@
+a {
+    text-decoration: unset;
+}
+
+/** common **/
+
+/** typography **/
+.txt-footer {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #576179;
+}
+
+/** Header Area **/
+.header-wrap {
+    display: flex;
+    justify-content: space-between;
+    padding: 32px 120px;
+    width: 100%;
+}
+
+.header-wrap .header-left {
+    display: flex;
+
+}
+
+.header-wrap .header-left .search-wrap {
+    position: relative;
+    display: flex;
+    margin-left: 87px;
+}
+
+.header-wrap .header-left .search-wrap::before {
+    position:absolute;
+    display: block;
+    content: '';
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    left: 20px;
+    transform: translate(0, -50%);
+    background-image: url("../assets/ico/ico_search.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.header-wrap .header-left .search-wrap .search {
+    padding-left: 52px;
+    width: 332px;
+    height:48px;
+    border :1px solid #2663FF;
+    border-radius: 999px;
+
+}
+
+.header-wrap .menu-wrap {
+    display: flex;
+    gap: 20px;
+}
+
+/** Footer Area **/
+.footer-area {
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    padding: 80px 120px 120px;
+    width: 100%;
+    bottom: 0;
+    left:0;
+    background-color: #EAEBF2;
+}
+
+.footer-area .footer-top {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.footer-area .footer-top a {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+    color: #101216;
+}
+
+.footer-area .footer-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top:40px;
+}
+
+.footer-area .footer-bottom .footer-left .company-wrap .company-info {
+    margin-top: 20px;
+}
+
+.footer-area .footer-bottom .footer-left .company-wrap .company-info span{
+    display: block;
+}
+
+/** Common Area **/
