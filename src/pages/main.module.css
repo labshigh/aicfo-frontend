@@ -79,7 +79,165 @@
     line-height: 24px;
 }
 
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 80px 120px;
+    background-color: #F7F8FF;
+}
+
 .sectionWh {
-    height:1000px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
     padding: 0 120px;
+}
+
+.sectionWh.categoryList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #C9CED9;
+    padding-top:94px;
+    padding-bottom: 94px;
+}
+
+.sectionWh.categoryList .categoryItem {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px 20px 20px;
+    text-align: center;
+}
+
+.sectionWh.categoryList .categoryItem span{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+    color: #4A546A;
+}
+
+.sectionWh.categoryBoxList {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 22px;
+    border-bottom: 1px solid #C9CED9;
+    padding-top:94px;
+    padding-bottom: 148px;
+}
+.sectionWh.categoryBoxList .categoryBoxItem {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    width: 18%;
+    border: 1px solid #A8ADBC;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.sectionWh.categoryBoxList .categoryBoxItem img {
+    margin:auto
+}
+
+.sectionWh.categoryBoxList .categoryBoxItem span{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+    color: #4A546A;
+}
+
+.sectionWh .sectionTitleWrap, .section .sectionTitleWrap {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 80px;
+    margin-bottom: 28px;
+    width: 100%;
+}
+
+.sectionWh .videoWrap {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    width: 100%;
+}
+
+.sectionWh .sectionTableWrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 148px;
+    width: 100%;
+}
+
+.sectionWh .sectionTableWrap .sectionTableItemWrap {
+    padding: 20px;
+    width: 100%;
+    border: 1px solid #E8EBDB;
+    border-radius: 20px;
+}
+
+.sectionWh .sectionTableWrap .sectionTableItemWrap table {
+    width: 100%;
+}
+
+.sectionWh .sectionTableWrap .sectionTitleWrap {
+    margin-top: 0;
+    width: 100%;
+}
+
+.sectionWh .sectionTableWrap .sectionTitleWrap p {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 36px;
+}
+
+.sectionWh .sectionTableWrap .sectionTitleWrap p:nth-child(2) {
+    margin: auto 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 28px;
+}
+
+.sectionWh .sectionTableWrap tbody tr {
+    padding: 5px 20px;
+    width: 100%;
+    border-bottom: 1px solid #A8ADBC;
+}
+
+.sectionWh .sectionTableWrap tbody tr:last-child {
+    border-bottom: none;
+}
+
+.sectionWh .sectionTableWrap tbody tr td {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    padding: 5px 10px 5px 20px;
+}
+
+.sectionWh .sectionTableWrap tbody tr td:nth-child(2) {
+    padding: 5px 20px 5px 10px;
+}
+
+.sectionWh .sectionTableWrap tbody tr.tableNotice td {
+    font-weight: 700;
+}
+
+.sectionWh .sectionTableWrap tbody tr td.tableTitle {
+    width: 75%;
+    text-align: left;
+}
+
+.sectionWh .sectionTableWrap tbody tr td.tableDate {
+    margin-left:20px;
+    width: 25%;
+    text-align: right;
+}
+
+.section.companyList {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 148px;
+    width: 100%;
 }

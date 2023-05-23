@@ -6,8 +6,72 @@ body {
     padding: 0 120px;
 }
 /** common **/
+/** button **/
+.inpBtn{
+    margin-top:50px;
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    background: #2663FF;
+    border-radius: 9999px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+}
+/** input **/
+.inpWrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 40px;
+    width: 100%;
+}
+.inpWrap label{
+    margin: auto;
+    min-width: 70px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+    text-align: right;
+    color: #4A546A;
+}
+
+.inpWrap .inpBox {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #A8ADBC;
+    border-radius: 9999px;
+}
 
 /** typography **/
+.txt-small {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.txt-normal {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+}
+
+.txt-large {
+
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 60px;
+    color: #6F778D;
+}
+
+.main .section-title{
+    color: #101216;
+}
+
 .txt-footer {
     font-size: 18px;
     font-weight: 400;
@@ -115,3 +179,6 @@ body {
 }
 
 /** Common Area **/
+.containerWrap.sub {
+    padding: 0 120px;
+}

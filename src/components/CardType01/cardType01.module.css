@@ -1,0 +1,28 @@
+.cardItem {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+.cardItem .category {
+    color: #2663FF;
+}
+
+.cardItem .title {
+    font-size: 20px;
+    line-height: 36px;
+    color: #101216;
+}
+
+.cardItem .content {
+    margin-top: 12px;
+    font-weight: 400;
+    color: #6F778D;
+}
+
+.cardItem .starList {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-top: 12px;
+}
