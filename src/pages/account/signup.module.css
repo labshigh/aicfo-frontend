@@ -3,32 +3,6 @@
     text-align: center;
 }
 
-.chkRemember {
-    margin-top: 14px;
-    margin-left: 100px;
-}
-
-.chkRemember label {
-    font-weight: 400;
-    color: #101216;
-}
-
-.findWrap {
-    margin-top: 12px;
-    text-align: right;
-    color: #2663FF;
-}
-
-.findWrap a {
-    font-weight: 400;
-    color: #2663FF;
-}
-
-.loginBtn {
-    display: block;
-    margin-top: 50px;
-}
-
 .socialBtnWrap {
     margin-top: 76px;
 }
@@ -42,6 +16,20 @@
     background: #fff;
     border: 1px solid #A8ADBC;
     border-radius: 9999px;
+}
+
+.socialBtnWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid #C9CED9;
+}
+
+.socialBtnWrap .socialBtn {
+    paddinf-left: 40px;
+    min-width: 288px;
 }
 
 .socialBtnWrap .socialBtn::before {
@@ -74,11 +62,6 @@
     background-image: url("../../assets/ico/ico_apple.png");
 }
 
-.infoWrap {
-    margin-top: 40px;
-    text-align: center;
-    margin-bottom: 480px;
-}
-.infoWrap a {
-    color: #2663FF;
+.signupEmailWrap {
+    margin-top:48px;
 }

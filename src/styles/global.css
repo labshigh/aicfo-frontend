@@ -7,10 +7,12 @@ body {
 }
 /** common **/
 /** button **/
-.inpBtn{
-    margin-top:50px;
+.btn-type01{
+    /*margin-top:50px;*/
+    margin: auto;
     padding: 10px 0;
     width: 100%;
+    /*height: 48px;*/
     text-align: center;
     color: #fff;
     background: #2663FF;
@@ -18,6 +20,17 @@ body {
     font-size: 18px;
     font-weight: 700;
     line-height: 28px;
+    border: 1px solid #2663FF;
+}
+
+.btn-type01:disabled {
+    background: #C9CED9;
+    color: #A8ADBC;
+    border: 1px solid #C9CED9;
+}
+
+.certification-type {
+    max-width: 192px;
 }
 /** input **/
 .inpWrap {
@@ -42,6 +55,24 @@ body {
     height: 48px;
     border: 1px solid #A8ADBC;
     border-radius: 9999px;
+    box-sizing: border-box;
+}
+
+.chkWrap {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.chkWrap label {
+    line-height: 28px;
+}
+
+.chkWrap input {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #A8ADBC;
+    border-radius: 4px;
 }
 
 /** typography **/
@@ -58,7 +89,9 @@ body {
 }
 
 .txt-large {
-
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 36px;
 }
 
 .section-title {
@@ -77,6 +110,12 @@ body {
     font-weight: 400;
     line-height: 28px;
     color: #576179;
+}
+
+/** Box **/
+.boxWrap {
+    border: 1px solid #C9CED9;
+    border-radius: 8px;
 }
 
 /** Header Area **/

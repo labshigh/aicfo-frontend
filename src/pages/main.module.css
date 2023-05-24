@@ -111,6 +111,7 @@
 }
 
 .sectionWh.categoryList .categoryItem span{
+    margin-top: 20px;
     font-size: 18px;
     font-weight: 500;
     line-height: 28px;
@@ -141,6 +142,7 @@
 }
 
 .sectionWh.categoryBoxList .categoryBoxItem span{
+    margin-top: 12px;
     font-size: 18px;
     font-weight: 500;
     line-height: 28px;
@@ -190,6 +192,26 @@
     font-size: 20px;
     font-weight: 700;
     line-height: 36px;
+}
+
+.sectionWh .sectionTableWrap .sectionTitleWrap p:first-child {
+    position: relative;
+    padding-left: 45px;
+}
+
+.sectionWh .sectionTableWrap .sectionTitleWrap p:first-child::before {
+    position: absolute;
+    display: block;
+    content: "";
+    top: 50%;
+    left: 10px;
+    width: 24px;
+    height: 24px;
+    transform: translate(0, -50%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-image: url("../assets/ico/ico_speaker.png");
 }
 
 .sectionWh .sectionTableWrap .sectionTitleWrap p:nth-child(2) {
