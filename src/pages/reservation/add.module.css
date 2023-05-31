@@ -1,0 +1,126 @@
+.sectionTitle {
+    margin-top: 120px;
+}
+
+.infoWrap {
+    margin-top: 40px;
+    padding: 20px 32px;
+    background: #F0F2FD;
+    border: 1px solid #C9CED9;
+    border-radius: 8px;
+}
+
+.infoWrap p:nth-child(2) {
+    margin-top: 20px;
+}
+
+.infoWrap .title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 40px;
+    color: #4A546A;
+}
+
+.infoWrap .desc {
+    position: relative;
+    margin-top: 4px;
+    padding-left: 12px;
+    font-weight: 400;
+    color: #101216;
+}
+
+.infoWrap .desc::before {
+    position: absolute;
+    content: '';
+    width: 4px;
+    height: 4px;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    background: #101216;
+}
+
+.inputGroup > div {
+    display: flex;
+    gap: 20px;
+    margin-top: 56px;
+}
+.inputGroup .label {
+    padding: 12px 0;
+    min-width: 160px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 40px;
+    background: #6181FF;
+    border-radius: 12px;
+    color: #fff;
+}
+
+.inputGroup textarea {
+    width: 100%;
+    min-height: 256px;
+    border: 1px solid #A8ADBC;
+    border-radius: 12px;
+}
+
+.inputGroup select {
+    width: 100%;
+    border: 1px solid #2663FF;
+    border-radius: 9999px;
+}
+
+.customSelect {
+    position: relative;
+    margin: auto;
+    width: 100%;
+}
+
+.customSelect p {
+    position: relative;
+    padding: 8px 12px;
+    border: 1px solid #2663FF;
+    border-radius: 20px;
+}
+
+.customSelect p::after{
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    content: '';
+    width: 8px; /* 사이즈 */
+    height: 8px; /* 사이즈 */
+    border-top: 2px solid #2663FF; /* 선 두께 */
+    border-right: 2px solid #2663FF; /* 선 두께 */
+    transform: rotate(135deg) translate(-75%); /* 각도 */
+}
+
+.customSelect p.active::after{
+    top: 50%;
+    transform: rotate(315deg); /* 각도 */
+}
+
+.customSelect ul {
+    position: absolute;
+    top: 48px;
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #A8ADBC;
+    border-radius: 20px;
+}
+
+.customSelect ul li {
+    padding: 8px 20px;
+}
+
+.customSelect ul li:first-child {
+    border-radius: 20px 20px 0 0;
+}
+
+.customSelect ul li:last-child {
+    border-radius: 0 0 20px 20px;
+}
+
+.customSelect ul li:nth-child(even) {
+    background: #F0F2FD;
+}

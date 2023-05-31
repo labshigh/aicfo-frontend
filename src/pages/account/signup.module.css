@@ -117,3 +117,107 @@
     background-color: #fff;
     left: 20px;
 }
+
+.checkPattern {
+    position: relative;
+    margin-top: 4px;
+    margin-left: 170px;
+    padding-left: 20px;
+    color: #868EA1;
+}
+
+.passPattern::before {
+    position:absolute;
+    display: block;
+    content: '';
+    top: 50%;
+    left: 0px;
+    width: 12px;
+    height: 12px;
+    transform: translate(0, -50%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("../../assets/ico/ico_success.png");
+}
+
+.failPattern::before {
+    position:absolute;
+    display: block;
+    content: '';
+    top: 50%;
+    left: 0px;
+    width: 12px;
+    height: 12px;
+    transform: translate(0, -50%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("../../assets/ico/ico_fail.png");
+}
+
+.signupDesc {
+    margin-top: 4px;
+    margin-left: 170px;
+    font-weight: 400;
+    color: #2663FF;
+}
+.signupDescFail {
+    margin-top: 4px;
+    margin-left: 170px;
+    font-weight: 400;
+    color: #F52C1A;
+}
+
+.smsWrap {
+    margin-top: 16px;
+}
+
+.allTerm {
+    margin-top: 50px;
+}
+
+.allTerm .termItem {
+    width: 100%;
+    font-weight: 400;
+    color: #101216;
+}
+
+.termItem {
+    display: flex;
+    width: 100%;
+}
+
+.termItem > label {
+    margin-left: 8px;
+}
+
+.termItem input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
+
+.termItemWrap {
+    margin-top: 14px;
+}
+
+.termItemWrap > .termGroup{
+    width: 100%;
+}
+
+.termItemWrap .termGroup .termItem label {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #101216;
+}
+
+.termItem .termAge {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #101216;
+}
+
+.btnSignup {
+    margin-bottom: 175px;
+}

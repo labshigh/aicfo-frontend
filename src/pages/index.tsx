@@ -14,7 +14,7 @@ import boxIco02 from "@/assets/ico/ico_boxitem02.png";
 import boxIco03 from "@/assets/ico/ico_boxitem03.png";
 import boxIco04 from "@/assets/ico/ico_boxitem04.png";
 import boxIco05 from "@/assets/ico/ico_boxitem05.png";
-import {dummyData} from "./dummyData";
+import {dummyData} from "../dummy/dummyData";
 import CardType01 from "@/components/CardType01/CardType01";
 import CardType02 from "@/components/CardType02/CardType02";
 import dummyVideo from "@/assets/dummy/dummy_vid.png";
