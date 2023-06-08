@@ -2,5 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/account/signup": "pages/account/signup.js"
+  "/social/googleLogin": "pages/social/googleLogin.js",
+  "/social/kakaoLogin": "pages/social/kakaoLogin.js",
+  "/social/naverLogin": "pages/social/naverLogin.js",
+  "/account/login": "pages/account/login.js",
+  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js"
 }

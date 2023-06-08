@@ -25,10 +25,25 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/account/signup": [
+    "/account/login": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/account/signup.js"
+      "static/chunks/pages/account/login.js"
+    ],
+    "/social/googleLogin": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/social/googleLogin.js"
+    ],
+    "/social/kakaoLogin": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/social/kakaoLogin.js"
+    ],
+    "/social/naverLogin": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/social/naverLogin.js"
     ]
   },
   "ampFirstPages": []
