@@ -14,7 +14,7 @@ const CardType02: React.FC<CardType01Props> = ({category, title, content, userIn
             <p className={`txt-small ${styles.category}`}>{category}</p>
             <p className={`txt-normal ${styles.title}`}>{title}</p>
             <p className={`txt-normal ${styles.content}`}>{content}</p>
-            <p className={styles.userInfo}>
+            <p className={`txt-normal ${styles.userInfo}`}>
                 <span>{userInfo}</span>님의 이용후기
             </p>
         </div>

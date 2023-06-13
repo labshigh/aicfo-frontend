@@ -2,10 +2,11 @@ import Seo from "@/components/Seo";
 import styles from "./signup.module.css";
 import Link from "next/link";
 import React, { useState } from 'react';
+import {APIService} from "@/api/index";
 
 export default function signup() {
     const [allTerm, setAllTerm] = useState(false);
-    const [signUp, setSignUp] = useState<any>({email: "", password: "", passwordRe: "", mobile: "", certificationNum: "", certificationFlag: false, smsFlag: false, termsService: false, privacyPoliceFlag: false, privacyUsageFlag: false, verificationAgeFlag: false});
+    const [signUp, setSignUp] = useState<any>({email: "", password: "", passwordRe: "", phoneNumber: "", phoneVerifiedFlag: false, certificationNum: "", certificationFlag: false, smsSendFlag: false, termsOfUse: false, privacyPolicy: false, personalInfoUse: false, userAgeVerification: false, emailVerifiedFlag: false, snsId: '', snsName: ''});
     const [checkEmail, setCheckEmail] = useState(false);
     const [checkPassword, setCheckPassword] = useState(false);
     const [passPatternLength, setPassPatternLength] = useState(false);
@@ -15,22 +16,51 @@ export default function signup() {
     const changeSmsFlag = () => {
         setSignUp({
             ...signUp,
-            smsFlag: signUp.smsFlag ? false : true
+            smsSendFlag: signUp.smsSendFlag ? false : true
         })
     }
 
     const changeCertificationFlag = () => {
         setSignUp({
             ...signUp,
-            certificationFlag: true
+            certificationFlag: true,
+            phoneVerifiedFlag: true
         })
     }
+
+    // 이메일 중복체크
+    const duplicateCheck = () => {
+
+        setSignUp({
+            ...signUp,
+            emailVerifiedFlag: true
+        })
+        console.info('signUp : ', signUp)
+    }
+
+    async function signUpRequest() {
+        try {
+            const {data} = await APIService.signUp(signUp);
+            console.info('data', data);
+            if(data.status === 200) {
+                alert('가입완료');
+            } else {
+                alert('가입 실패');
+            }
+        } catch (e: any) {
+            console.log(e.response?.data?.message);
+        }
+    }
+    // const signUpRequest = () => {
+    //     alert();
+    // }
 
     const changeData = (e: any) => {
         if (e.currentTarget.name === 'email') {
             setSignUp({
                 ...signUp,
-                email: e.currentTarget.value
+                email: e.currentTarget.value,
+                emailVerifiedFlag: false
             })
             setCheckEmail(true);
             const emailPattern = '^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,6})*$';
@@ -81,79 +111,80 @@ export default function signup() {
             } else {
                 setCheckPassword(false);
             }
-        } else if(e.currentTarget.name === 'mobile') {
+        } else if(e.currentTarget.name === 'phoneNumber') {
             setSignUp({
                 ...signUp,
-                mobile: e.currentTarget.value
+                phoneNumber: e.currentTarget.value
             })
 
         } else if(e.currentTarget.name === 'certificationNum') {
             setSignUp({
                 ...signUp,
                 certificationNum: e.currentTarget.value,
-                certificationFlag: true
+                certificationFlag: true,
+                phoneVerifiedFlag: true
             })
 
-        } else if(e.currentTarget.name === 'smsFlag') {
+        } else if(e.currentTarget.name === 'smsSendFlag') {
             setSignUp({
                 ...signUp,
-                smsFlag: signUp.smsFlag ? false : true
+                smsSendFlag: signUp.smsSendFlag ? false : true
             })
-        } else if(e.currentTarget.name === 'termsService') {
-            if(signUp.termsService) {
+        } else if(e.currentTarget.name === 'termsOfUse') {
+            if(signUp.termsOfUse) {
                 setAllTerm(false);
-            } else if(!signUp.termsService && signUp.privacyPoliceFlag && signUp.privacyUsageFlag) {
+            } else if(!signUp.termsOfUse && signUp.privacyPolicy && signUp.personalInfoUse) {
                 setAllTerm(true);
             }
             setSignUp({
                 ...signUp,
-                termsService: signUp.termsService ? false : true,
+                termsOfUse: signUp.termsOfUse ? false : true,
             })
         } else if(e.currentTarget.name === 'privacyPolice') {
-            if(signUp.privacyPoliceFlag) {
+            if(signUp.privacyPolicy) {
                 setAllTerm(false);
-            } else if(signUp.termsService && !signUp.privacyPoliceFlag && signUp.privacyUsageFlag) {
+            } else if(signUp.termsOfUse && !signUp.privacyPolicy && signUp.personalInfoUse) {
                 setAllTerm(true);
             }
             setSignUp({
                 ...signUp,
-                privacyPoliceFlag: signUp.privacyPoliceFlag ? false : true,
+                privacyPolicy: signUp.privacyPolicy ? false : true,
             })
         } else if(e.currentTarget.name === 'privacyUsage') {
-            if(signUp.privacyUsageFlag) {
+            if(signUp.personalInfoUse) {
                 setAllTerm(false);
-            }else if(signUp.termsService && signUp.privacyPoliceFlag && !signUp.privacyUsageFlag) {
+            }else if(signUp.termsOfUse && signUp.privacyPolicy && !signUp.personalInfoUse) {
                 setAllTerm(true);
             }
             setSignUp({
                 ...signUp,
-                privacyUsageFlag: signUp.privacyUsageFlag ? false : true,
+                personalInfoUse: signUp.personalInfoUse ? false : true,
             })
         } else if(e.currentTarget.name === 'allTerms') {
             if (!allTerm) {
                 setAllTerm(true);
                 setSignUp({
                     ...signUp,
-                    termsService: true,
-                    privacyPoliceFlag: true,
-                    privacyUsageFlag: true,
+                    termsOfUse: true,
+                    privacyPolicy: true,
+                    personalInfoUse: true,
                 })
             } else {
 
                 setAllTerm(false);
                 setSignUp({
                     ...signUp,
-                    termsService: false,
-                    privacyPoliceFlag: false,
-                    privacyUsageFlag: false,
+                    termsOfUse: false,
+                    privacyPolicy: false,
+                    personalInfoUse: false,
                 })
             }
         } else if(e.currentTarget.name === 'verificationAge') {
             setSignUp({
                 ...signUp,
-                verificationAgeFlag: signUp.verificationAgeFlag ? false : true,
+                userAgeVerification: signUp.userAgeVerification ? false : true,
             })
-            console.info(signUp.verificationAgeFlag)
+            console.info(signUp.userAgeVerification)
         }
 
         console.info('signUp', signUp)
@@ -173,7 +204,8 @@ export default function signup() {
                 <p className={`section-sub-title ${styles.subTitle}`}>이메일 회원가입</p>
                 <div className={`inpWrap`}>
                     <label htmlFor="inp_email">이메일</label>
-                    <input type="text" id="inp_email" className={`inpBox`} value={signUp.email} name="email" onChange={changeData}/>
+                    <input type="text" id="inp_email" className={`inpBox`} name="email" onChange={changeData}/>
+                    <button className={`btn-type01 certification-type`} onClick={duplicateCheck}>중복가입 확인</button>
                 </div>
                 {
                     checkEmail && <p className={`txt-small ${styles.signupDesc}`}>가입 가능한 이메일입니다.</p>
@@ -197,11 +229,11 @@ export default function signup() {
                 }
                 <div className={`inpWrap`}>
                     <label htmlFor="inp_phone">전화번호 인증하기</label>
-                    <input type="text" id="inp_phone" className={`inpBox`}value={signUp.mobile} name="mobile" onChange={changeData} disabled={signUp.certificationFlag}/>
+                    <input type="text" id="inp_phone" className={`inpBox`}value={signUp.phoneNumber} name="phoneNumber" onChange={changeData} disabled={signUp.certificationFlag}/>
                     <button className={`btn-type01 certification-type`} disabled={signUp.certificationFlag}>인증번호 발송</button>
                 </div>
                 {
-                    signUp.mobile.length > 0 &&
+                    signUp.phoneNumber.length > 0 &&
                         <p className={`txt-small ${styles.signupDesc}`}>발송된 인증번호를 입력하시고 인증 버튼을 클릭해주세요.</p>
                 }
                 {
@@ -219,7 +251,7 @@ export default function signup() {
                 <div className={`inpWrap ${styles.smsWrap}`}>
                     <label htmlFor="inp_certification">안내문자 수신</label>
                     <div className={`${styles.customSwitch}`}>
-                        <input role="switch" type="checkbox" className="sticky" name="smsFlag" checked={signUp.smsFlag} onChange={changeData} />
+                        <input role="switch" type="checkbox" className="sticky" name="smsSendFlag" checked={signUp.smsSendFlag} onChange={changeData} />
                     </div>
                 </div>
                 <div className={`inpWrap ${styles.allTerm}`}>
@@ -233,15 +265,15 @@ export default function signup() {
                     <label></label>
                     <div className={styles.termGroup}>
                         <div className={styles.termItem}>
-                            <input type="checkbox" id="inp_term01" name="termsService" checked={signUp.termsService} onChange={changeData} />
+                            <input type="checkbox" id="inp_term01" name="termsOfUse" checked={signUp.termsOfUse} onChange={changeData} />
                             <label htmlFor="inp_term01" className={`txt-small`}>서비스 이용약관 동의 (필수)</label>
                         </div>
                         <div className={styles.termItem}>
-                            <input type="checkbox" id="inp_term02" name="privacyPolice" checked={signUp.privacyPoliceFlag} onChange={changeData}/>
+                            <input type="checkbox" id="inp_term02" name="privacyPolice" checked={signUp.privacyPolicy} onChange={changeData}/>
                             <label htmlFor="inp_term02" className={`txt-small`}>개인정보 취급방침 동의 (필수)</label>
                         </div>
                         <div className={styles.termItem}>
-                            <input type="checkbox" id="inp_term03" name="privacyUsage" checked={signUp.privacyUsageFlag} onChange={changeData}/>
+                            <input type="checkbox" id="inp_term03" name="privacyUsage" checked={signUp.personalInfoUse} onChange={changeData}/>
                             <label htmlFor="inp_term03" className={`txt-small`}>개인정보 이용/수집 동의 (필수)</label>
                         </div>
                     </div>
@@ -249,12 +281,12 @@ export default function signup() {
                 <div className={`inpWrap`}>
                     <label htmlFor="inp_terms">이용자 연령 확인</label>
                     <div className={`${styles.termItem}`}>
-                        <input type="checkbox" id="inp_age_terms" checked={signUp.verificationAgeFlag} name="verificationAge" onChange={changeData}/>
+                        <input type="checkbox" id="inp_age_terms" checked={signUp.userAgeVerification} name="verificationAge" onChange={changeData}/>
                         <label htmlFor="inp_age_terms" className={`txt-small ${styles.termAge}`}>만 14세 이상입니다. (필수)</label>
                     </div>
                 </div>
                 <div className={`inpWrap ${styles.btnSignup}`}>
-                    <button className={`btn-type01`} disabled={!signUp.certificationFlag || !signUp.privacyUsageFlag || !signUp.privacyPoliceFlag || !signUp.termsService || !signUp.verificationAgeFlag || !checkEmail || !checkPassword}>회원가입</button>
+                    <button className={`btn-type01`} disabled={!signUp.certificationFlag || !signUp.personalInfoUse || !signUp.privacyPolicy || !signUp.termsOfUse || !signUp.userAgeVerification || !checkEmail || !checkPassword} onClick={signUpRequest}>회원가입</button>
                 </div>
             </div>
         </div>

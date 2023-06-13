@@ -10,10 +10,15 @@
 }
 
 .cardItem .category {
-    color: #2663FF;
+    margin: 0 auto 0 0;
+    padding: 4px 20px;
+    border-radius: 4px;
+    color: #FFF;
+    background: #6181FF;
 }
 
 .cardItem .title {
+    margin-top: 8px;
     font-size: 20px;
     line-height: 36px;
     color: #101216;
@@ -30,4 +35,11 @@
     flex-direction: row;
     gap: 5px;
     margin-top: 12px;
+}
+
+.cardItem .userInfo {
+    margin-top: 12px;
+    text-align: right;
+    font-weight: 400;
+    color: #4A546A;
 }

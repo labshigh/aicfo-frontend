@@ -221,3 +221,29 @@
 .btnSignup {
     margin-bottom: 175px;
 }
+
+
+.socialSignupHeader {
+    margin-top: 72px;
+    text-align: center;
+}
+
+.socialSignupHeader .socialSignupDesc {
+    margin-top: 12px;
+    font-weight: 400;
+    color: #101216;
+}
+
+.socialSignupHeader .socialEmail {
+    margin: 48px auto 0 auto;
+    padding: 20px 60px;
+    width: 600px;
+    border: 1px solid #C9CED9;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.termWrap {
+    padding: 0 300px;
+    text-align: center;
+}

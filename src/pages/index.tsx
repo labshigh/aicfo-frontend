@@ -26,8 +26,13 @@ import ci_hyundai from "@/assets/dummy/CI/CI_Hyndai.png";
 import ci_nc from "@/assets/dummy/CI/NC Master CI_Navy gradient.png";
 import ci_netmarble from "@/assets/dummy/CI/IC_netmarble.png";
 import ci_visang from "@/assets/dummy/CI/CI_Visang.png";
+import {inspect} from "util";
+import { useRecoilValue, useResetRecoilState } from "recoil";
+import {userState} from "@/atoms";
+
 export default function main() {
     const {dummyCard01, dummyCard02} = dummyData();
+    const userInfo = useRecoilValue(userState);
     return (
         <div>
             <Seo title="main" />
@@ -35,34 +40,36 @@ export default function main() {
                 <div className={mainCss.dummyBox}></div>
                 <div className={mainCss.btnList}>
                     <div className={mainCss.btnItem01}>
-                        <p>빠른 상담 예약</p>
-                        <span>(화상 / 전화 / 방문)</span>
+                        <p><span>1:1 문의</span><span className={`txt-small ${mainCss.visualTextBox}`}>대기중</span></p>
                     </div>
                     <div className={mainCss.btnItem02}>
-                        <span>상담 글 쓰기</span>
-                        <span>(비공개 상담)</span>
+                        <p>상담 글 쓰기<span className={`txt-small`}>(비공개 상담)</span></p>
+
+                        {userInfo.isLoggedIn ? 'yes' : 'no'}
+
                     </div>
                     <div className={mainCss.btnItem03}>
                         <div className={mainCss.btnItem03Left}>
-                            <span>1:1 문의</span>
+                            <p>빠른 상담 예약</p>
+                            <span>(화상 / 전화 / 방문)</span>
                         </div>
-                        <div className={mainCss.btnItem03Right}>
-                            <div className={mainCss.radioGroup}>
-                                <input type="radio" id="contactChoice1"
-                                       name="contact" value="wait"/>
-                                <label htmlFor="Choice1">대기중</label>
-                            </div>
-                            <div className={mainCss.radioGroup}>
-                                <input type="radio" id="contactChoice2"
-                                       name="contact" value="ing"/>
-                                <label htmlFor="Choice2">상담중</label>
-                            </div>
-                            <div className={mainCss.radioGroup}>
-                                <input type="radio" id="contactChoice3"
-                                       name="contact" value="no"/>
-                                <label htmlFor="Choice3">자리비움</label>
-                            </div>
-                        </div>
+                        {/*<div className={mainCss.btnItem03Right}>*/}
+                        {/*    <div className={mainCss.radioGroup}>*/}
+                        {/*        <input type="radio" id="contactChoice1"*/}
+                        {/*               name="contact" value="wait"/>*/}
+                        {/*        <label htmlFor="Choice1">대기중</label>*/}
+                        {/*    </div>*/}
+                        {/*    <div className={mainCss.radioGroup}>*/}
+                        {/*        <input type="radio" id="contactChoice2"*/}
+                        {/*               name="contact" value="ing"/>*/}
+                        {/*        <label htmlFor="Choice2">상담중</label>*/}
+                        {/*    </div>*/}
+                        {/*    <div className={mainCss.radioGroup}>*/}
+                        {/*        <input type="radio" id="contactChoice3"*/}
+                        {/*               name="contact" value="no"/>*/}
+                        {/*        <label htmlFor="Choice3">자리비움</label>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>
@@ -157,6 +164,7 @@ export default function main() {
                         <div className={mainCss.sectionTitleWrap}>
                             <p className="section-title">공지</p>
                             <p className="section-more">+ 더보기</p>
+                            <Link href='/board/notice'>aa</Link>
                         </div>
                         <table>
                             <tbody>
