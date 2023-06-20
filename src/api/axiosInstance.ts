@@ -17,11 +17,11 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       // 세션 만료
-      if (window.location.pathname !== "/login") {
+      if (window.location.pathname !== "/account/login") {
         window.localStorage.setItem("access_token", "");
         window.localStorage.setItem("refresh_token", "");
         window.localStorage.setItem("current_referrer", "");
-        window.location.pathname = "/login";
+        window.location.pathname = "/account/login";
       }
     }
     return Promise.reject(error);

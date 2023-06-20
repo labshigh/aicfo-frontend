@@ -8,6 +8,7 @@ import {userState} from "@/atoms";
 export default function Header() {
     const router = useRouter();
     const userInfo = useRecoilValue(userState);
+    console.info('userInfo', userInfo)
     return (
         <div className="header-wrap">
             <div className="header-left">
@@ -20,8 +21,10 @@ export default function Header() {
             </div>
             <div className="menu-wrap">
                 <Link href="/" className={`consult`}></Link>
-                <Link href="/account/login" className={`login`}></Link>
-                {userInfo.isLoggedIn ? 'yes' : 'no'}
+
+                {
+                    userInfo.isLoggedIn ? <Link href="/mypage" className={`my-avatar`}></Link> : <Link href="/account/login" className={`login`}></Link>
+                }
             </div>
 
         </div>

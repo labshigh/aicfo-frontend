@@ -40,9 +40,9 @@ export default function signup() {
 
     async function signUpRequest() {
         try {
-            const {signUpData} = await APIService.signUp(signUp);
-            console.info('data', signUpData);
-            if(signUpData.status === 200) {
+            const {data} = await APIService.signUp(signUp);
+            console.info('data', data);
+            if(data.status === 200) {
 
                 const {data} = await APIService.login({email: signUp.email, password: '', snsFlag:true});
 
@@ -67,6 +67,7 @@ export default function signup() {
                         };
                     });
                     // requestSubAccount();
+                    router.push({pathname:'/'})
                 }
 
                 alert('가입완료');
@@ -137,11 +138,18 @@ export default function signup() {
                 userAgeVerification: signUp.userAgeVerification ? false : true,
             })
             console.info(signUp.userAgeVerification)
+        } else if (e.currentTarget.name === 'email') {
+            setSignUp({
+                ...signUp,
+                email: e.currentTarget.value,
+                emailVerifiedFlag: false
+            })
         }
 
         console.info('signUp', signUp)
 
     }
+
     return (
         <div>
             <Seo title="main" />
@@ -152,11 +160,11 @@ export default function signup() {
                     <p className={`txt-normal ${styles.socialSignupDesc}`}>소셜 계정으로 회원가입을 진행합니다.<br/>
                         약관동의 후 AI CFO 회원으로 가입됩니다.<br/>
                         이후, 소셜계정으로 간편로그인하세요</p>
-                    <p className={`${styles.socialEmail}`}>{signUp.email}Sta*****@gmail.com</p>
-                </div>
+                    {
+                        signUp.email != '' ? <p className={`${styles.socialEmail}`}>{signUp.email}</p> : <input type="text" id="inp_email" className={`inpBox`} name="email" onChange={changeData}/>
+                    }
 
-                <p>{signUp.snsName}</p>
-                <p>{signUp.email}</p>
+                </div>
                 <div className={`${styles.termWrap}`}>
                     <div className={`inpWrap ${styles.allTerm}`}>
                         <label htmlFor="inp_terms">약관동의</label>

@@ -19,8 +19,8 @@ const tokenDelete = () => {
 
 export const APIService = {
     async signUp(json: any) {
-        const data = await api.post('/api/signup', json).then(res => res);
-        return data;
+        const signUpData = await api.post('/api/signup', json).then(res => res);
+        return signUpData;
     },
     async login(json: any) {
         const data = await api.post('/api/signin', json).then(res => res);
@@ -40,15 +40,15 @@ export const UserAPIService = {
         const data =  axiosInstance.defaults.headers.common["Authorization"] = "Bearer " + token;
         // console.log(axiosInstance.defaults.headers.common);
     },
-    async getNoticeList(page: number = 1) {
-        const noticeList = axiosInstance.get('/board?boardTypeCommonCodeUid=19&page='+page);
+    async getBoardList(boardId = 19, pageNum: number = 1, searchValue="") {
+        const noticeList = axiosInstance.get(`/board?boardTypeCommonCodeUid=${boardId}&page=${pageNum}`);
         return noticeList;
         //'/api/board?boardTypeCommonCodeUid=19&page=1&size=3'
     },
-    async getEventList(page: number = 1) {
-        const eventList = axiosInstance.get('/board?boardTypeCommonCodeUid=20&page='+page);
-        return eventList;
+    async getBoardDetail(uid: any, boardId = 19) {
+        const noticeDetail = axiosInstance.get(`/board/${uid}?boardTypeCommonCodeUid=${boardId}`);
+        return noticeDetail;
         //'/api/board?boardTypeCommonCodeUid=19&page=1&size=3'
-    }
+    },
 
 }

@@ -16,52 +16,60 @@ const googleLogin = () => {
     const [userStatus, setUserStatus] = useRecoilState(userState);
     const getToken = async(code: string) => {
 
-        const res = await axios.get('http://localhost:35100/api/account/callback?state=GOOGLE_LOGIN&code='+code); // 스프링 API서버에 code값을 담아 로그인 요청
-        if (res.data) {
-            if(res.data.status === 200) {
-                if(res.data.data.newFlag) {
-                    // 신규가입
-                    router.push({
-                        pathname: "/account/socialSignup",
-                        query: {
-                            email: res.data.data.email,
-                            id: res.data.data.id,
-                            snsName: res.data.data.snsName,
-                            nickname: res.data.data.nickname
+        try {
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/account/callback?state=GOOGLE_LOGIN&code=${code}`); // 스프링 API서버에 code값을 담아 로그인 요청
+            if (res.data) {
+                if(res.data.status === 200) {
+                    if(res.data.data.newFlag) {
+                        // 신규가입
+                        router.push({
+                            pathname: "/account/socialSignup",
+                            query: {
+                                email: res.data.data.email,
+                                id: res.data.data.id,
+                                snsName: res.data.data.snsName,
+                                nickname: res.data.data.nickname
+                            }
+                        })
+                    } else {
+                        const {data} = await APIService.login({email: res.data.data.email, password: '', snsFlag:true});
+
+                        if (data.data.jwtToken) {
+
+                            UserAPIService.setToken(data.data.jwtToken.accessToken);
+                            window.localStorage.setItem(
+                                "access_token",
+                                data.data.jwtToken.accessToken
+                            );
+                            window.localStorage.setItem(
+                                "refresh_token",
+                                data.data.jwtToken.refreshToken
+                            );
+                            setUserStatus((prevState) => {
+                                return {
+                                    ...prevState,
+                                    isLoggedIn: true,
+                                    current: data.data.referrerCode,
+                                    showTempPopup: true,
+                                };
+                            });
                         }
-                    })
-                } else {
-                    const {data} = await APIService.login({email: res.data.data.email, password: '', snsFlag:true});
-
-                    if (data.data.jwtToken) {
-
-                        UserAPIService.setToken(data.data.jwtToken.accessToken);
-                        window.localStorage.setItem(
-                            "access_token",
-                            data.data.jwtToken.accessToken
-                        );
-                        window.localStorage.setItem(
-                            "refresh_token",
-                            data.data.jwtToken.refreshToken
-                        );
-                        setUserStatus((prevState) => {
-                            return {
-                                ...prevState,
-                                isLoggedIn: true,
-                                current: data.data.referrerCode,
-                                showTempPopup: true,
-                            };
-                        });
+                        // 로그인 컨트롤러에서 로그인 처리 후 화면에서는 페이지 이동
+                        router.push({pathname:'/'})
                     }
-                    // 로그인 컨트롤러에서 로그인 처리 후 화면에서는 페이지 이동
-                    router.push({pathname:'/'})
+                    alert('인증완료');
+                } else {
+                    alert('인증실패');
                 }
-                alert('인증완료');
-            } else {
-                alert('인증실패');
+                // window.close();
             }
-            // window.close();
+        } catch (e:any) {
+            alert(e.response.data.message);
+            router.push({
+                pathname: "/account/login",
+            })
         }
+
 
     }
     return <></>;

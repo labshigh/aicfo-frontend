@@ -8,11 +8,11 @@ import { RecoilRoot } from "recoil";
 export default function App({Component, pageProps}: AppProps) {
     return (
         <RecoilRoot>
-        <div className="defaultBg">
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
-        </div>
+            <div className="defaultBg">
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            </div>
         </RecoilRoot>
     );
 }

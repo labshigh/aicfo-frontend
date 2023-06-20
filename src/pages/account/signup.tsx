@@ -3,8 +3,10 @@ import styles from "./signup.module.css";
 import Link from "next/link";
 import React, { useState } from 'react';
 import {APIService} from "@/api/index";
+import {useRouter} from "next/router";
 
 export default function signup() {
+    const router = useRouter();
     const [allTerm, setAllTerm] = useState(false);
     const [signUp, setSignUp] = useState<any>({email: "", password: "", passwordRe: "", phoneNumber: "", phoneVerifiedFlag: false, certificationNum: "", certificationFlag: false, smsSendFlag: false, termsOfUse: false, privacyPolicy: false, personalInfoUse: false, userAgeVerification: false, emailVerifiedFlag: false, snsId: '', snsName: ''});
     const [checkEmail, setCheckEmail] = useState(false);
@@ -44,10 +46,12 @@ export default function signup() {
             console.info('data', data);
             if(data.status === 200) {
                 alert('가입완료');
+                router.push('/');
             } else {
                 alert('가입 실패');
             }
         } catch (e: any) {
+            alert('가입에 실패하였습니다.');
             console.log(e.response?.data?.message);
         }
     }
@@ -198,7 +202,7 @@ export default function signup() {
                 <Link href="/" className={`btn-type01 ${styles.naver} ${styles.socialBtn}`}>네이버로 회원가입</Link>
                 <Link href="/" className={`btn-type01 ${styles.kakao} ${styles.socialBtn}`}>카카오로 회원가입</Link>
                 <Link href="/" className={`btn-type01 ${styles.google} ${styles.socialBtn}`}>Google로 회원가입</Link>
-                <Link href="/" className={`btn-type01 ${styles.apple} ${styles.socialBtn}`}>Apple로 회원가입</Link>
+                {/*<Link href="/" className={`btn-type01 ${styles.apple} ${styles.socialBtn}`}>Apple로 회원가입</Link>*/}
             </div>
             <div className={styles.signupEmailWrap}>
                 <p className={`section-sub-title ${styles.subTitle}`}>이메일 회원가입</p>

@@ -1,10 +1,13 @@
 // import {Pagination} from "antd";
 import Seo from "@/components/Seo";
 import React, {useEffect, useState} from "react";
-import {ListProps} from "@/pages/board/notice";
 import {UserAPIService} from "@/api";
-import styles from "@/pages/board/notice/notice.module.css";
+import styles from "@/pages/board/board.module.css";
 import {Pagination} from "antd";
+import headerBg from "@/assets/bg/board/event_header_bg.png";
+import Image from "next/image";
+import {useDummy} from "@/dummy/useDummy";
+import {useRouter} from "next/router";
 
 export interface ListProps {
     list: NoticeList[];
@@ -13,7 +16,7 @@ export interface ListProps {
 }
 export interface  NoticeList {
     uid: number;
-    createdAt: String;
+    createdAt: string;
     title: string;
     content: string;
     viewCount: number;
@@ -22,14 +25,16 @@ export interface  NoticeList {
 }
 
 export default function eventList() {
+    const router = useRouter();
     const [page, setPage] = useState(1);
     const [listData, setListData] = useState<ListProps | null>(null);
+    const {dummyEventBoardList} = useDummy();
     useEffect(() => {
         const getEvent = async () => {
             try {
                 // const {noticeList} = await UserAPIService.getNoticeList(page);
                 // console.info('noticeList', noticeList);
-                await UserAPIService.getEventList(page).then((result) => {
+                await UserAPIService.getBoardList(20, page).then((result) => {
                     console.info('result', result)
                     setListData(result.data.data);
                 })
@@ -43,8 +48,27 @@ export default function eventList() {
     return (
         <div>
             <Seo title="event" />
-            <p className={`section-title ${styles.sectionTitle}`}>이벤트</p>
-            <div className="contentWrap">
+            <div className={`boardHeaderWrap`}>
+                <p className={`section-title ${styles.sectionTitle}`}>이벤트</p>
+                <Image src={headerBg} alt=""/>
+            </div>
+
+            <div className="searchWrap">
+                <select
+                    className={`selectBox txt-normal`}
+                    value={'a'}
+                    // onChange={handleSelectChange}
+                >
+                    <option value="all">전체</option>
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                </select>
+                <input type="text" className='inpSearch' placeholder="게시판 내 검색" />
+                {/*<Button>Search</Button>*/}
+                <div className='btnSearch'>검색</div>
+            </div>
+
+            <div className={`boardContentWrap ${styles.tableWrap}`}>
                 <table className='tableWrap notice'>
                     <colgroup>
                         <col width="10%"/>
@@ -64,7 +88,7 @@ export default function eventList() {
                     {
                         listData?.list.map((itm, idx) => {
                             return (
-                                <tr key={idx} className='sticky'>
+                                <tr key={idx} className={itm.topFlag ? `sticky` : ''} onClick={()=>router.push('/board/event/'+itm.uid)}>
                                     <td className='tdCenter'>1</td>
                                     <td>{itm.title}</td>
                                     <td className='tdCenter'>{new Date(itm.createdAt).toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-') }</td>
@@ -75,6 +99,21 @@ export default function eventList() {
                             )
                         })
                     }
+
+                    {/*{*/}
+                    {/*    dummyEventBoardList?.list.map((itm, idx) => {*/}
+                    {/*        return (*/}
+                    {/*            <tr key={idx} className={itm.topFlag ? `sticky` : ''}>*/}
+                    {/*                <td className='tdCenter'>1</td>*/}
+                    {/*                <td>{itm.title}</td>*/}
+                    {/*                <td className='tdCenter'>{new Date(itm.createdAt).toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-') }</td>*/}
+
+                    {/*                <td className='tdCenter'>{itm.viewCount}</td>*/}
+                    {/*            </tr>*/}
+
+                    {/*        )*/}
+                    {/*    })*/}
+                    {/*}*/}
                     </tbody>
                 </table>
                 <div className={`paging`}>

@@ -1,7 +1,7 @@
 /** dummy **/
 .dummyBox {
-    width: 1068px;
-    height: 520px;
+    width: 100%;
+    height: 748px;
     background: #E2E2E2;
     background-image: url("../assets/dummy/img_mainvisual.png");
     background-size: cover;
@@ -9,98 +9,98 @@
 }
 
 .mainVisual {
+    position: relative;
     display: flex;
+    justify-content: center;
     /*padding-bottom: 120px;*/
     background-color: #FAFAFF;
 }
 
 .mainVisual .btnList {
-    display: flex;
-    flex-direction: column;
-}
-
-.mainVisual .btnList .btnItem01 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 388px;
-    height: 120px;
-    font-size: 22px;
-    font-weight: 400;
-    text-align: center;
-    line-height: 40px;
-    background: linear-gradient(180deg, #6F778D 0%, #4A546A 100%);
+    position: relative;
+    width: 0;
+    top: 36px;
+    right: 111px;
     color: #fff;
+
 }
 
-.mainVisual .btnList .btnItem01 .visualTextBox {
-    margin-left:8px;
-    padding: 4px 8px;
-    color: #C2C8FE;
-    border: 1px solid #C2C8FE;
-    border-radius: 4px;
+.mainVisual .btnList::before {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 272px;
+    height: 748px;
+    top: -36px;
+    right: 0;
+    background-image: url("../assets/bg/main/main_circle_line.png");
 }
 
-.mainVisual .btnList .btnItem02 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    width: 388px;
-    height: 120px;
-    font-size: 22px;
-    font-weight: 400;
-    line-height: 40px;
-    background: linear-gradient(180deg, #6F778D 0%, #4A546A 100%);
-    color: #fff;
+.mainVisual .btnList .btnItem {
+    position: relative;
+    width: 0;
+    min-height: 184px;
 }
 
-.mainVisual .btnList .btnItem02 span {
-    margin-left: 8px;
-    font-weight: 400;
+.mainVisual .btnList .btnItem:first-child{
+    margin-top: 12px;
+    min-height: 240px;
 }
 
-.mainVisual .btnList .btnItem03 {
-    display: flex;
-    flex-direction: row;
+.mainVisual .btnList .btnItem:last-child {
+    margin-top: 16px;
 }
 
-.mainVisual .btnList .btnItem03 .btnItem03Left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    width: 388px;
-    height: 280px;
+.mainVisual .btnList .btnItem:first-child .mainCircle{
+    margin-top: 0;
+    width: 240px;
+    height: 240px;
+    left: -255px;
+    top: 0px;
     background: linear-gradient(180deg, #2663FF 0%, #003DF0 100%);
-    color: #fff;
 }
 
-.mainVisual .btnList .btnItem03 .btnItem03Left p{
+.mainVisual .btnList .btnItem .mainCircle {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    background: linear-gradient(180deg, #6F778D 0%, #4A546A 100%);
+    border-radius: 999px;
+    left: -214px;
+    top:44px;
+}
+
+.mainVisual .btnList .btnItem .mainCircle.reserve img {
+    margin: 41px auto 0 82px;
+}
+
+.mainVisual .btnList .btnItem .mainCircle img {
+    margin: 22px auto 0 60px;
+}
+
+
+.mainVisual .btnList .btnItem .mainCircle.reserve .bigCircleTitle {
+    margin-top: 14px;
     font-size: 28px;
-    font-weight: 700;
     line-height: 52px;
+    font-weight: 700;
+    text-align: center;
 }
 
-.mainVisual .btnList .btnItem03 .btnItem03Right {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-left: 20px;
-}
-
-.mainVisual .btnList .btnItem03 .btnItem03Right .radioGroup {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    color: #3A4254
-}
-
-.mainVisual .btnList .btnItem03 .btnItem03Right .radioGroup label {
-    font-size: 14px;
+.mainVisual .btnList .btnItem .mainCircle.reserve .bigCircleDesc {
     font-weight: 400;
-    line-height: 24px;
+    text-align: center;
 }
+
+.mainVisual .btnList .btnItem .mainCircle .circleTitle {
+    margin-top: 8px;
+    text-align: center;
+}
+.mainVisual .btnList .btnItem .mainCircle .circleDesc {
+    margin-top: 8px;
+    text-align: center;
+}
+
 
 .section {
     display: flex;

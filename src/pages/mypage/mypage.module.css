@@ -1,0 +1,42 @@
+.sectionWrap {
+    padding: 80px 120px;
+    background: #fff;
+    box-shadow: 0px 4px 16px rgba(45, 51, 82, 0.08);
+}
+
+.sectionWrap:last-child {
+    margin-top: 40px;
+}
+
+.sectionWrap .account
+
+.sectionWrap .sectionTitle {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 44px;
+}
+
+.sectionWrap .sectionContent {
+    margin-top: 88px;
+}
+
+.sectionWrap li {
+    display: flex;
+    padding: 20px 0 10px 0;
+    width: 100%;
+    border-bottom: 1px solid #C9CED9;
+}
+
+.sectionWrap li .label {
+    margin: auto 0;
+    width: 10%;
+}
+
+.sectionWrap li .value {
+    margin: auto 0;
+    width: 70%;
+}
+
+.sectionWrap li .actionBtn {
+    width: 20%;
+}

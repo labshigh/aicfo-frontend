@@ -1,11 +1,11 @@
+// import {Pagination} from "antd";
 import Seo from "@/components/Seo";
 import React, {useEffect, useState} from "react";
+import {UserAPIService} from "@/api";
 import styles from "@/pages/board/board.module.css";
-import {UserAPIService} from "@/api/index";
 import {Pagination} from "antd";
-import headerBg from "@/assets/bg/board/notice_header_bg.png";
+import headerBg from "@/assets/bg/board/attachment_header_bg.png";
 import Image from "next/image";
-import Link from "next/link";
 import {useRouter} from "next/router";
 
 export interface ListProps {
@@ -23,17 +23,16 @@ export interface  NoticeList {
 
 }
 
-export default function notice() {
+export default function eventList() {
     const router = useRouter();
     const [page, setPage] = useState(1);
     const [listData, setListData] = useState<ListProps | null>(null);
-
     useEffect(() => {
-        const getNotice = async () => {
+        const getEvent = async () => {
             try {
                 // const {noticeList} = await UserAPIService.getNoticeList(page);
                 // console.info('noticeList', noticeList);
-                await UserAPIService.getBoardList(19, page).then((result) => {
+                await UserAPIService.getBoardList(24, page).then((result) => {
                     console.info('result', result)
                     setListData(result.data.data);
                 })
@@ -42,23 +41,13 @@ export default function notice() {
                 console.error('err', err);
             }
         }
-        getNotice();
+        getEvent();
     },[])
-
-    const move = (idx:number) => {
-        router.push({
-            pathname: "/board/"+idx,
-            query: {
-                uid: idx,
-                pageId: 19,
-            }
-        })
-    }
     return (
         <div>
-            <Seo title="notice" />
+            <Seo title="event" />
             <div className={`boardHeaderWrap`}>
-                <p className={`section-title ${styles.sectionTitle}`}>공지사항</p>
+                <p className={`section-title ${styles.sectionTitle}`}>파일 자료실</p>
                 <Image src={headerBg} alt=""/>
             </div>
 
@@ -76,6 +65,7 @@ export default function notice() {
                 {/*<Button>Search</Button>*/}
                 <div className='btnSearch'>검색</div>
             </div>
+
             <div className={`boardContentWrap ${styles.tableWrap}`}>
                 <table className='tableWrap notice'>
                     <colgroup>
@@ -96,12 +86,14 @@ export default function notice() {
                     {
                         listData?.list.map((itm, idx) => {
                             return (
-                                <tr key={idx} className={itm.topFlag ? `sticky` : ''} onClick={()=>router.push('/board/notice/'+itm.uid)}>
+                                <tr key={idx} className={itm.topFlag ? `sticky` : ''} onClick={()=>router.push('/board/attachment/'+itm.uid)}>
                                     <td className='tdCenter'>1</td>
                                     <td>{itm.title}</td>
                                     <td className='tdCenter'>{new Date(itm.createdAt).toLocaleDateString().replace(/\./g, '').replace(/\s/g, '-') }</td>
+
                                     <td className='tdCenter'>{itm.viewCount}</td>
                                 </tr>
+
                             )
                         })
                     }
@@ -117,7 +109,6 @@ export default function notice() {
                     />
                 </div>
             </div>
-
         </div>
     )
 }

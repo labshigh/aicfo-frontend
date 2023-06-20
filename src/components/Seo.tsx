@@ -6,7 +6,9 @@ export default class Seo extends Component<{ title: any }> {
     render() {
         let {title} = this.props;
         return (
-            <Head><title>{title} | AI CFO</title></Head>
+            <Head>
+                <title>{title} | AI CFO</title>
+            </Head>
         );
     }
 }

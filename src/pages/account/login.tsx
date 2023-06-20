@@ -116,7 +116,7 @@ export default function login() {
     return (
         <div>
             <Seo title="main" />
-            <p className={`section-title ${styles.sectionTitle}`}>AI CFO 아이디 찾기</p>
+            <p className={`section-title ${styles.sectionTitle}`}>AI CFO 로그인</p>
             <div className={`inpWrap`}>
                 <label htmlFor="inp_email">이메일</label>
                 <input type="text" id="inp_email" className={`inpBox`} name="email" onChange={changeData}/>
@@ -133,7 +133,7 @@ export default function login() {
                 <Link href="/account/findpwd" className={`txt-small`}>비밀번호 찾기</Link> / <Link href="/account/findid" className={`txt-small`}>아이디 찾기</Link>
             </div>
             <button className={`btn-type01 ${styles.loginBtn}`} onClick={loginRequest}>로그인</button>
-            <button className={`btn-type01 ${styles.loginBtn}`} onClick={memberRequest}>회원조회</button>
+            {/*<button className={`btn-type01 ${styles.loginBtn}`} onClick={memberRequest}>회원조회</button>*/}
             <div className={`${styles.socialBtnWrap}`}>
                 <button className={`btn-type01 ${styles.naver} ${styles.socialBtn}`} onClick={() => naverLoginPopup()}>네이버로 로그인</button>
                 <button className={`btn-type01 ${styles.kakao} ${styles.socialBtn}`} onClick={() => kakaoLoginPopup()}>카카오로 로그인</button>

@@ -10,10 +10,14 @@ export interface LayoutProps {
 }
 export default function Layout({ children, ...props }: LayoutProps) {
     const router = useRouter();
+    let classNm = '';
+    if(router.pathname == '/mypage') {
+        classNm = 'bgBlue';
+    }
     return (
         <div className="wrap">
             <Header/>
-            <div className={router.pathname === '/' ? 'containerWrap main' : 'containerWrap sub'}>{children}</div>
+            <div className={router.pathname === '/' ? `containerWrap main ${classNm}` : `containerWrap sub ${classNm}`}>{children}</div>
             <Footer/>
         </div>
     );
