@@ -1,5 +1,5 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/HeaderNew";
+import Footer from "@/components/FooterNew";
 import {Component} from "react";
 import {useRouter} from "next/router";
 import { ReactNode } from "react";
@@ -15,9 +15,11 @@ export default function Layout({ children, ...props }: LayoutProps) {
         classNm = 'bgBlue';
     }
     return (
-        <div className="wrap">
-            <Header/>
-            <div className={router.pathname === '/' ? `containerWrap main ${classNm}` : `containerWrap sub ${classNm}`}>{children}</div>
+        <div className="fobu-wrap">
+            <div className={`layer-wrap`}>
+                <Header/>
+                <div className={router.pathname === '/' ? `containerWrap main ${classNm}` : `containerWrap sub ${classNm}`}>{children}</div>
+            </div>
             <Footer/>
         </div>
     );

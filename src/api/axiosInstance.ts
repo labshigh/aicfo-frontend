@@ -20,7 +20,6 @@ axiosInstance.interceptors.response.use(
       if (window.location.pathname !== "/account/login") {
         window.localStorage.setItem("access_token", "");
         window.localStorage.setItem("refresh_token", "");
-        window.localStorage.setItem("current_referrer", "");
         window.location.pathname = "/account/login";
       }
     }

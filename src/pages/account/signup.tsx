@@ -8,12 +8,15 @@ import {useRouter} from "next/router";
 export default function signup() {
     const router = useRouter();
     const [allTerm, setAllTerm] = useState(false);
-    const [signUp, setSignUp] = useState<any>({email: "", password: "", passwordRe: "", phoneNumber: "", phoneVerifiedFlag: false, certificationNum: "", certificationFlag: false, smsSendFlag: false, termsOfUse: false, privacyPolicy: false, personalInfoUse: false, userAgeVerification: false, emailVerifiedFlag: false, snsId: '', snsName: ''});
+    const [signUp, setSignUp] = useState<any>({email: "", password: "", passwordRe: "", phoneNumber: "", verifyCode:"", verifyFlag: false, certificationNum: "", certificationFlag: false, smsSendFlag: false, termsOfUse: false, privacyPolicy: false, personalInfoUse: false, userAgeVerification: false, emailVerifiedFlag: false, snsId: '', snsName: ''});
     const [checkEmail, setCheckEmail] = useState(false);
     const [checkPassword, setCheckPassword] = useState(false);
     const [passPatternLength, setPassPatternLength] = useState(false);
     const [passPatternMix, setPassPatternMix] = useState(false);
     const [passPatternSpecial, setPassPatternSpecial] = useState(false);
+
+    // 인증코드 요청 시 사용하는 변수
+    const [verifyCodeRequestFlag, setVerifyCodeRequestFlag] = useState(false);
 
     const changeSmsFlag = () => {
         setSignUp({
@@ -26,7 +29,7 @@ export default function signup() {
         setSignUp({
             ...signUp,
             certificationFlag: true,
-            phoneVerifiedFlag: true
+            verifyFlag: true
         })
     }
 
@@ -116,17 +119,19 @@ export default function signup() {
                 setCheckPassword(false);
             }
         } else if(e.currentTarget.name === 'phoneNumber') {
+            // 인증코드 발송
             setSignUp({
                 ...signUp,
-                phoneNumber: e.currentTarget.value
+                phoneNumber: e.currentTarget.value.replaceAll("-", "")
             })
 
-        } else if(e.currentTarget.name === 'certificationNum') {
+        } else if(e.currentTarget.name === 'verifyCode') {
+            // 인증코드 인증
             setSignUp({
                 ...signUp,
-                certificationNum: e.currentTarget.value,
-                certificationFlag: true,
-                phoneVerifiedFlag: true
+                verifyCode: e.currentTarget.value,
+                // certificationFlag: true,
+                // verifyFlag: true
             })
 
         } else if(e.currentTarget.name === 'smsSendFlag') {
@@ -188,12 +193,69 @@ export default function signup() {
                 ...signUp,
                 userAgeVerification: signUp.userAgeVerification ? false : true,
             })
-            console.info(signUp.userAgeVerification)
+        }
+    }
+
+    // 인증번호 요청
+    async function  sendVerifySms () {
+        const phoneNumCheck = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+        if(signUp.phoneNumber == "") {
+            alert("전화번호를 입력해 주세요");
+            return false;
         }
 
-        console.info('signUp', signUp)
+        if(!phoneNumCheck.test(signUp.phoneNumber)) {
+            alert("핸드폰번호 형식이 아닙니다.");
+            return false;
+        }
 
+        try {
+            const {data} = await APIService.sendVerifySms(signUp);
+            if(data.status === 200) {
+                setVerifyCodeRequestFlag(true);
+            } else {
+                alert(data.message)
+            }
+        } catch (e) {
+            alert('인증코드 요청에 실패하였습니다.');
+            console.info('sendVerifySms', e);
+        }
     }
+
+    // sms 인증
+    async function  verifySms () {
+        const verifyCodeNumCheck = /^[0-9]+$/;
+        if(signUp.verifyCode == "") {
+            alert('인증코드를 입력해 주세요');
+            return false;
+        }
+
+        if(!verifyCodeNumCheck.test(signUp.verifyCode)) {
+            alert('인증코드는 숫자형식입니다.');
+            return false;
+        }
+
+        if(signUp.verifyCode.length <= 5) {
+            alert('인증코드를 확인해 주세요 ');
+            return false;
+        }
+        try {
+            const {data} = await APIService.verifySms(signUp);
+            if(data.status === 200) {
+                alert('인증이 완료되었습니다.')
+                setSignUp({
+                    ...signUp,
+                    verifyFlag: true
+                })
+            } else {
+                alert("인증에 실패했습니다.");
+            }
+        } catch (e) {
+            alert("인증에 실패했습니다.");
+            console.info('verifySms', e);
+        }
+    }
+
     return (
         <div>
             <Seo title="main" />
@@ -234,19 +296,19 @@ export default function signup() {
                 <div className={`inpWrap`}>
                     <label htmlFor="inp_phone">전화번호 인증하기</label>
                     <input type="text" id="inp_phone" className={`inpBox`}value={signUp.phoneNumber} name="phoneNumber" onChange={changeData} disabled={signUp.certificationFlag}/>
-                    <button className={`btn-type01 certification-type`} disabled={signUp.certificationFlag}>인증번호 발송</button>
+                    <button className={`btn-type01 certification-type`} onClick={sendVerifySms} disabled={verifyCodeRequestFlag}>인증번호 발송</button>
                 </div>
                 {
                     signUp.phoneNumber.length > 0 &&
                         <p className={`txt-small ${styles.signupDesc}`}>발송된 인증번호를 입력하시고 인증 버튼을 클릭해주세요.</p>
                 }
                 {
-                    !signUp.certificationFlag &&
-                  <div className={`inpWrap ${styles.smsWrap}`}>
-                    <label htmlFor="inp_certification"></label>
-                    <input type="text" id="inp_certification" className={`inpBox`}value={signUp.certificationNum} name="certificationNum" onChange={changeData}/>
-                    <button className={`btn-type01 certification-type`} onClick={changeCertificationFlag}>인증</button>
-                  </div>
+                    verifyCodeRequestFlag &&
+                      <div className={`inpWrap ${styles.smsWrap}`}>
+                        <label htmlFor="inp_certification"></label>
+                        <input type="text" id="inp_certification" className={`inpBox`}value={signUp.verifyCode} name="verifyCode" onChange={changeData}/>
+                        <button className={`btn-type01 certification-type`} onClick={verifySms} disabled={signUp.verifyFlag == true}>인증</button>
+                      </div>
                 }
                 {
                     signUp.certificationFlag &&
@@ -290,7 +352,7 @@ export default function signup() {
                     </div>
                 </div>
                 <div className={`inpWrap ${styles.btnSignup}`}>
-                    <button className={`btn-type01`} disabled={!signUp.certificationFlag || !signUp.personalInfoUse || !signUp.privacyPolicy || !signUp.termsOfUse || !signUp.userAgeVerification || !checkEmail || !checkPassword} onClick={signUpRequest}>회원가입</button>
+                    <button className={`btn-type01`} disabled={!signUp.verifyFlag || !signUp.personalInfoUse || !signUp.privacyPolicy || !signUp.termsOfUse || !signUp.userAgeVerification || !checkEmail || !checkPassword} onClick={signUpRequest}>회원가입</button>
                 </div>
             </div>
         </div>

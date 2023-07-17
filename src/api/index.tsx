@@ -1,29 +1,23 @@
-import axios from 'axios';
-import cookie from 'js-cookie';
 import axiosInstance from "@/api/axiosInstance";
-
-export const apiBaseUrl = `${process.env.NEXT_PUBLIC_API_ENDPOINT}`;
-
-
-
-const api = axios.create({ baseURL: apiBaseUrl, timeout: 60 * 1000 });
-
-const tokenIn = () => {
-    api.defaults.headers.common['Authorization'] = `Bearer ${cookie.get('accessToken') || ''}`;
-};
-
-const tokenDelete = () => {
-    api.defaults.headers.common['Authorization'] = ``;
-};
 
 
 export const APIService = {
     async signUp(json: any) {
-        const signUpData = await api.post('/api/signup', json).then(res => res);
+        const signUpData = axiosInstance.post('/signup', json).then(res => res);
         return signUpData;
     },
     async login(json: any) {
-        const data = await api.post('/api/signin', json).then(res => res);
+        const data = axiosInstance.post('/signin', json).then(res => res);
+        return data;
+    },
+    // sms 인증요청
+    async sendVerifySms(json: any) {
+        const data = axiosInstance.post('/member/sendVerifySms', json).then(res => res);
+        return data;
+    },
+    // sms 인증 확인
+    async verifySms(json: any) {
+        const data = axiosInstance.put('/member/verifySms', json).then(res => res);
         return data;
     },
     ///api/member
